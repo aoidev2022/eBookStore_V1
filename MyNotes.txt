@@ -1,0 +1,80 @@
+---------------------------------------------------------------------------------------------
+------EF-------------------------------------------------------------------------------------
+
+-- to create the first migration
+CLI> dotnet ef migrations add Initiall --project eBookStore.API.Author
+PM> add-migration Initiall
+
+-- to run the migrations
+CLI> dotnet ef database update --project eBookStore.API.Author
+PM> Update-database
+
+---------------------------------------------------------------------------------------------
+------GIT------------------------------------------------------------------------------------
+
+-- to see the git global configuration
+git config --global
+
+-- create a new repository on the command line
+echo "# eBookStore_V1" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/aoidev2022/eBookStore_V1.git
+git push -u origin main
+
+-- push an existing repository from the command line
+git remote add origin https://github.com/aoidev2022/eBookStore_V1.git
+git branch -M main
+git push -u origin main
+
+---------------------------------------------------------------------------------------------
+------DOCKER------------------------------------------------------------------------------------
+
+-- run and expose a containerized postgres service
+docker run --name my-postgres -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres:latest
+
+-- start a bash into the containre
+docker exec -it my-postgres bash
+
+-- run and expose a containerized mssql server service
+docker run --name my-mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123." -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
+
+docker network connect my-bridge-network my-authors-api
+docker run --name my-authors-api -d -p 5021:80 store.api.authors
+docker inspect my-bridge-network
+docker inspect my-mssql
+
+
+docker build -t store.api.authors .
+
+---------------------------------------------------------------------------------------------
+------POSTGRES-------------------------------------------------------------------------------
+
+-- start sesion with postgres user
+psql -U postgres
+
+-- list user roles
+\du
+
+-- create a database
+create database <database-name>;
+
+-- list databases
+\l
+
+-- connect to a database
+\c <database-name>
+
+-- list tables (relations)
+\d
+
+---------------------------------------------------------------------------------------------
+------Microsoft SQL Server-------------------------------------------------------------------
+
+-- to pull image
+docker pull mcr.microsoft.com/mssql/server
+
+-- to run a new container
+docker run --name my-mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123." -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest

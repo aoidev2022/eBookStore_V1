@@ -1,0 +1,57 @@
+version: '3.4'
+
+services:
+  ebookstore.api.author:
+    image: ${DOCKER_REGISTRY-}ebookstore.api.author
+    build:
+      context: .
+      dockerfile: eBookStore.API.Author/Dockerfile
+    ports:
+      - 5021:80
+    restart: on-failure
+    networks:
+      - eBookStore
+      
+    depends_on:
+      - db
+
+  ebookstore.api.book:
+    image: ${DOCKER_REGISTRY-}ebookstore.api.book
+    build:
+      context: .
+      dockerfile: eBookStore.API.Book/Dockerfile
+    ports:
+      - 5022:80
+    restart: on-failure
+    networks:
+      - eBookStore
+    depends_on:
+      - db
+
+  ebookstore.api.basket:
+    image: ${DOCKER_REGISTRY-}ebookstoreapibasket
+    build:
+      context: .
+      dockerfile: eBookStore.API.Basket/Dockerfile
+    ports:
+      - 5023:80
+    restart: on-failure
+    networks:
+      - eBookStore
+    depends_on:
+      - db
+      
+  db:
+    image: "mcr.microsoft.com/mssql/server:latest"
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Admin123."
+      ACCEPT_EULA: "Y"
+    networks:
+      - eBookStore
+
+networks:
+  eBookStore:
+    name: eBookStore
+    driver: bridge

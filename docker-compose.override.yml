@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  ebookstore.api.author:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5021:80
+
+  ebookstore.api.book:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5022:80
+
+  ebookstore.api.basket:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Services__Author=http://ebookstore.api.author
+      - Services__Book=http://ebookstore.api.book
+    ports:
+      - 5023:80

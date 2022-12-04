@@ -1,15 +1,4 @@
 ---------------------------------------------------------------------------------------------
-------EF-------------------------------------------------------------------------------------
-
--- to create the first migration
-CLI> dotnet ef migrations add Initiall --project eBookStore.API.Author
-PM> add-migration Initiall
-
--- to run the migrations
-CLI> dotnet ef database update --project eBookStore.API.Author
-PM> Update-database
-
----------------------------------------------------------------------------------------------
 ------GIT------------------------------------------------------------------------------------
 
 -- to see the git global configuration
@@ -28,6 +17,17 @@ git push -u origin main
 git remote add origin https://github.com/aoidev2022/eBookStore_V1.git
 git branch -M main
 git push -u origin main
+
+---------------------------------------------------------------------------------------------
+------EF-------------------------------------------------------------------------------------
+
+-- to create the first migration
+CLI> dotnet ef migrations add Initiall --project eBookStore.API.Author
+PM> add-migration Initiall
+
+-- to run the migrations
+CLI> dotnet ef database update --project eBookStore.API.Author
+PM> Update-database
 
 ---------------------------------------------------------------------------------------------
 ------DOCKER------------------------------------------------------------------------------------

@@ -34,9 +34,17 @@ namespace eBookStore.API.Book.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> Post(CreateBook request)
+        public async Task<ActionResult> Post(CreateBook request)
         {
-            return await _mediator.Send(request);
+            return Ok(await _mediator.Send(request));
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] DeleteBook request)
+        {
+            await _mediator.Send(request);
+            return NoContent();
         }
     }
 }

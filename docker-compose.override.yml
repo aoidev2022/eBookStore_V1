@@ -27,3 +27,6 @@ services:
     ports:
       - 5020:80
 
+  db:
+    ports:
+    - "1433:1433"

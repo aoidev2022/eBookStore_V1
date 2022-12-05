@@ -6,7 +6,8 @@ namespace eBookStore.API.Author.Application.Author
     {
         public MappingProfile()
         {
-            CreateMap<Model.Author, AuthorDto>();
+            CreateMap<Model.Author, AuthorDto>().ReverseMap();
+            CreateMap<CreateAuthor, Model.Author>();
         }
     }
 }

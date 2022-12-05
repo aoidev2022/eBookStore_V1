@@ -25,7 +25,32 @@
         }
       ],
       "UpstreamPathTemplate": "/book/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/author",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ebookstore.api.author",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/author",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/author/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ebookstore.api.author",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/author/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
     }
   ]
 }

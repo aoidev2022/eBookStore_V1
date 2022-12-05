@@ -32,7 +32,7 @@ namespace eBookStore.API.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
-            System.Threading.Thread.Sleep(1000 * 15);
+            System.Threading.Thread.Sleep(1000 * 6);
 
             app.UseRouting();
 

@@ -48,7 +48,7 @@ namespace eBookStore.API.Author
                 app.UseDeveloperExceptionPage();
             }
 
-            System.Threading.Thread.Sleep(1000 * 10);
+            System.Threading.Thread.Sleep(1000 * 6);
 
             context.Database.Migrate();
 

@@ -7,6 +7,7 @@ namespace eBookStore.API.Book.Application.Book
         public MappingProfile()
         {
             CreateMap<Model.Book, BookDto>();
+            CreateMap<CreateBook, Model.Book>();
         }
     }
 }

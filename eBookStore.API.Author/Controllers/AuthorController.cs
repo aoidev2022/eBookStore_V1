@@ -40,5 +40,12 @@ namespace eBookStore.API.Author.Controllers
             var id = await _mediator.Send(request);
             return id;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete([FromRoute] DeleteAuthor request)
+        {
+            await _mediator.Send(request);
+            return NoContent();
+        }
     }
 }

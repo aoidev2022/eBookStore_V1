@@ -1,4 +1,6 @@
-﻿using eBookStore.API.Author.Persistence;
+﻿using AutoMapper;
+
+using eBookStore.API.Author.Persistence;
 
 using FluentValidation;
 
@@ -29,20 +31,17 @@ namespace eBookStore.API.Author.Application.Author
     public class CreateAuthorHandler : IRequestHandler<CreateAuthor, int>
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CreateAuthorHandler(AppDbContext dbContext)
+        public CreateAuthorHandler(IMapper mapper, AppDbContext context)
         {
-            _context = dbContext;
+            _mapper = mapper;
+            _context = context;
         }
 
         public async Task<int> Handle(CreateAuthor request, CancellationToken cancellationToken)
         {
-            var entity = new Model.Author
-            {
-                Name = request.Name,
-                DateOfBirth = request.DateOfBirth
-            };
-
+            var entity = _mapper.Map<Model.Author>(request);
             _context.Add(entity);
 
             await _context.SaveChangesAsync(cancellationToken);

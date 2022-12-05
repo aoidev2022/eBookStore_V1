@@ -20,3 +20,10 @@ services:
       - Services__Book=http://ebookstore.api.book
     ports:
       - 5023:80
+
+  ebookstore.api.gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5020:80
+

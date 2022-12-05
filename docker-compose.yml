@@ -29,7 +29,7 @@ services:
       - db
 
   ebookstore.api.basket:
-    image: ${DOCKER_REGISTRY-}ebookstoreapibasket
+    image: ${DOCKER_REGISTRY-}ebookstore.api.basket
     build:
       context: .
       dockerfile: eBookStore.API.Basket/Dockerfile
@@ -40,6 +40,16 @@ services:
       - eBookStore
     depends_on:
       - db
+      
+  ebookstore.api.gateway:
+    image: ${DOCKER_REGISTRY-}ebookstore.api.gateway
+    build:
+      context: .
+      dockerfile: eBookStore.API.Gateway/Dockerfile
+    depends_on:
+    - ebookstore.api.book
+    networks:
+      - eBookStore
       
   db:
     image: "mcr.microsoft.com/mssql/server:latest"

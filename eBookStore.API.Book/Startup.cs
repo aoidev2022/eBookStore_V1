@@ -6,18 +6,13 @@ using MediatR;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace eBookStore.API.Book
 {
@@ -53,6 +48,8 @@ namespace eBookStore.API.Book
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            System.Threading.Thread.Sleep(1000 * 10);
 
             context.Database.Migrate();
 

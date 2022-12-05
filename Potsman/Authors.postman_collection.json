@@ -1,0 +1,80 @@
+{
+	"info": {
+		"_postman_id": "a48541a9-eb1c-4a3e-8c82-33695734d7c0",
+		"name": "Authors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1203787"
+	},
+	"item": [
+		{
+			"name": "CreateAuthor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Gabriel García Márquez\",\r\n    \"DateOfBirth\": \"1986-07-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5021/api/Author",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5021",
+					"path": [
+						"api",
+						"Author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAuthor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5021/api/Author/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5021",
+					"path": [
+						"api",
+						"Author",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAuthors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5021/api/Author",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5021",
+					"path": [
+						"api",
+						"Author"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

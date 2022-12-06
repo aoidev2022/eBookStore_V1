@@ -1,3 +1,6 @@
+using eBookStore.API.Gateway.MessageHandler;
+using eBookStore.API.Gateway.RemoteInterface.Author;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+
+using System;
 
 namespace eBookStore.API.Gateway
 {
@@ -21,7 +26,14 @@ namespace eBookStore.API.Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOcelot();
+            services.AddHttpClient("author-service", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Author"]);
+            });
+
+            services.AddSingleton<IAuthorRemote, AuthorRemote>();
+            services.AddOcelot()
+                .AddDelegatingHandler<BookHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

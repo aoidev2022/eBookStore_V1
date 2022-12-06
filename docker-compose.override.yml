@@ -24,6 +24,7 @@ services:
   ebookstore.api.gateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Services__Author=http://ebookstore.api.gateway
     ports:
       - 5020:80
 

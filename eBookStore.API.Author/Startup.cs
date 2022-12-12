@@ -1,4 +1,7 @@
 using eBookStore.API.Author.Persistence;
+using eBookStore.API.Author.RabbitHandler;
+using eBookStore.RabbitMQ.Bus;
+using eBookStore.RabbitMQ.Events.Queue;
 
 using FluentValidation.AspNetCore;
 
@@ -27,6 +30,16 @@ namespace eBookStore.API.Author
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRabbitEventBus, RabbitEventBus>(sp =>
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitEventBus(sp.GetService<IMediator>(), scopeFactory);
+            });
+
+            services.AddTransient<EmailEventHandler>();
+
+            services.AddTransient<IEventHandler<EmailEvent>, EmailEventHandler>();
+
 #pragma warning disable CS0618 // Type or member is obsolete
             services.AddControllers().AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -48,8 +61,6 @@ namespace eBookStore.API.Author
                 app.UseDeveloperExceptionPage();
             }
 
-            System.Threading.Thread.Sleep(1000 * 6);
-
             context.Database.Migrate();
 
             app.UseRouting();
@@ -60,6 +71,9 @@ namespace eBookStore.API.Author
             {
                 endpoints.MapControllers();
             });
+
+            var eventBus = app.ApplicationServices.GetRequiredService<IRabbitEventBus>();
+            eventBus.Subscribe<EmailEvent, EmailEventHandler>();
         }
     }
 }

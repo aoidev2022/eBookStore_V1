@@ -28,6 +28,16 @@ services:
     ports:
       - 5020:80
 
-  db:
+  ebookstore.db:
     ports:
-    - "1433:1433"
+    - 1433:1433
+
+  ebookstore.rabbitmq:
+    environment:
+    - RABBITMQ_DEFAULT_USER=guest
+    - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      # AMQP protocol port
+      - 5672:5672
+      # HTTP management UI
+      - 15672:15672

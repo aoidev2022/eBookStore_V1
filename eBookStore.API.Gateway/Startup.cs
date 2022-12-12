@@ -44,7 +44,7 @@ namespace eBookStore.API.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
-            System.Threading.Thread.Sleep(1000 * 6);
+            System.Threading.Thread.Sleep(1000 * 5);
 
             app.UseRouting();
 

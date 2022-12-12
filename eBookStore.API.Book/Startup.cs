@@ -1,4 +1,5 @@
 using eBookStore.API.Book.Persistence;
+using eBookStore.RabbitMQ.Bus;
 
 using FluentValidation.AspNetCore;
 
@@ -39,6 +40,12 @@ namespace eBookStore.API.Book
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSingleton<IRabbitEventBus, RabbitEventBus>(sp =>
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitEventBus(sp.GetService<IMediator>(), scopeFactory);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +56,7 @@ namespace eBookStore.API.Book
                 app.UseDeveloperExceptionPage();
             }
 
-            System.Threading.Thread.Sleep(1000 * 6);
+            System.Threading.Thread.Sleep(1000 * 5);
 
             context.Database.Migrate();
 

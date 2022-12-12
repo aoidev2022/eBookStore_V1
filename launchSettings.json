@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "ebookstore.api.author": "StartDebugging",
+        "ebookstore.api.basket": "StartDebugging",
+        "ebookstore.api.book": "StartDebugging",
+        "ebookstore.api.gateway": "StartDebugging",
+        "ebookstore.db": "StartWithoutDebugging",
+        "ebookstore.rabbitmq": "StartWithoutDebugging"
+      }
+    }
+  }
+}

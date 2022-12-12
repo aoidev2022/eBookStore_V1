@@ -8,10 +8,10 @@ services:
       dockerfile: eBookStore.API.Author/Dockerfile
     restart: on-failure
     networks:
-      - eBookStore
-      
+      - eBookStore      
     depends_on:
-      - db
+      - ebookstore.db
+      - ebookstore.rabbitmq
 
   ebookstore.api.book:
     image: ${DOCKER_REGISTRY-}ebookstore.api.book
@@ -22,7 +22,8 @@ services:
     networks:
       - eBookStore
     depends_on:
-      - db
+      - ebookstore.db
+      - ebookstore.rabbitmq
 
   ebookstore.api.basket:
     image: ${DOCKER_REGISTRY-}ebookstore.api.basket
@@ -33,25 +34,35 @@ services:
     networks:
       - eBookStore
     depends_on:
-      - db
+      - ebookstore.db
+      - ebookstore.rabbitmq
       
   ebookstore.api.gateway:
     image: ${DOCKER_REGISTRY-}ebookstore.api.gateway
     build:
       context: .
       dockerfile: eBookStore.API.Gateway/Dockerfile
-    depends_on:
-    - ebookstore.api.book
     networks:
       - eBookStore
+    depends_on:
+    - ebookstore.api.book
+    - ebookstore.api.author
+    - ebookstore.api.basket
       
-  db:
+  ebookstore.db:
+    container_name: "ebookstore.db"
     image: "mcr.microsoft.com/mssql/server:latest"
     volumes:
     - sqlvolume:/var/opt/mssql    
     environment:
       SA_PASSWORD: "Admin123."
       ACCEPT_EULA: "Y"
+    networks:
+      - eBookStore
+
+  ebookstore.rabbitmq:
+    container_name: "ebookstore.rabbitmq"
+    image: rabbitmq:3.8-management-alpine
     networks:
       - eBookStore
 

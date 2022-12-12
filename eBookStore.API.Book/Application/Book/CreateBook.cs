@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 
 using eBookStore.API.Book.Persistence;
+using eBookStore.RabbitMQ.Bus;
+using eBookStore.RabbitMQ.Events.Queue;
 
 using FluentValidation;
 
 using MediatR;
 
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,13 +33,15 @@ namespace eBookStore.API.Book.Application.Book
 
     public class CreateBookHandler : IRequestHandler<CreateBook, int>
     {
-        private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
+        readonly AppDbContext _context;
+        readonly IMapper _mapper;
+        readonly IRabbitEventBus _rabbitEventBus;
 
-        public CreateBookHandler(AppDbContext context, IMapper mapper)
+        public CreateBookHandler(AppDbContext context, IMapper mapper, IRabbitEventBus rabbitEventBus)
         {
             _context = context;
             _mapper = mapper;
+            _rabbitEventBus = rabbitEventBus;
         }
 
         public async Task<int> Handle(CreateBook request, CancellationToken cancellationToken)
@@ -45,6 +50,9 @@ namespace eBookStore.API.Book.Application.Book
             _context.Books.Add(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            var email = new EmailEvent { Body = JsonSerializer.Serialize(request), Receiper = "aoi.182@live.com", Title = $"New book created: {request.Name}" };
+            _rabbitEventBus.PublishEvent(email);
 
             return entity.Id;
         }

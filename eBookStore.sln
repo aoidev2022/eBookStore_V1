@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBookStore.API.Author", "eB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7766AB09-BD47-43B7-9A75-8FF16B5C2765}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.yml = docker-compose.yml
 		MyNotes.txt = MyNotes.txt
 	EndProjectSection
 EndProject
@@ -14,11 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBookStore.API.Book", "eBoo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBookStore.API.Basket", "eBookStore.API.Basket\eBookStore.API.Basket.csproj", "{935B612F-B4DE-443E-82FB-3769E224D010}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "eBookStore", "eBookStore.dcproj", "{EF0D0A83-B242-4A50-A132-23DBA4425D17}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBookStore.API.Gateway", "eBookStore.API.Gateway\eBookStore.API.Gateway.csproj", "{73FE3E28-D7DC-450C-A325-E57E9FA8BFCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eBookStore.RabbitMQ", "eBookStore.RabbitMQ\eBookStore.RabbitMQ.csproj", "{70ECFC00-81EF-450F-8D5B-C0511C375EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eBookStore.RabbitMQ", "eBookStore.RabbitMQ\eBookStore.RabbitMQ.csproj", "{70ECFC00-81EF-450F-8D5B-C0511C375EE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +38,6 @@ Global
 		{935B612F-B4DE-443E-82FB-3769E224D010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{935B612F-B4DE-443E-82FB-3769E224D010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{935B612F-B4DE-443E-82FB-3769E224D010}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF0D0A83-B242-4A50-A132-23DBA4425D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF0D0A83-B242-4A50-A132-23DBA4425D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF0D0A83-B242-4A50-A132-23DBA4425D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF0D0A83-B242-4A50-A132-23DBA4425D17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73FE3E28-D7DC-450C-A325-E57E9FA8BFCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73FE3E28-D7DC-450C-A325-E57E9FA8BFCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73FE3E28-D7DC-450C-A325-E57E9FA8BFCE}.Release|Any CPU.ActiveCfg = Release|Any CPU

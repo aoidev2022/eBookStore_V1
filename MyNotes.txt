@@ -86,3 +86,9 @@ docker run --name my-mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123." -
 docker run -d --hostname eBookStore-rabbit-server --name eBookStore.rabbitmq -p 1433:1433 - 15672:15672 rabbitmq:3.8-management-alpine
 
 Management UI http://localhost:15672/
+
+
+---------------------------------------------------------------------------------------------
+------Docker Compose-------------------------------------------------------------------------
+
+docker-compose up -d

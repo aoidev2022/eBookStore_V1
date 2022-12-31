@@ -3,18 +3,20 @@ version: '3.4'
 services:
   ebookstore.api.author:
     image: ${DOCKER_REGISTRY-}ebookstore.api.author
+    container_name: ebookstore.api.author
     build:
       context: .
       dockerfile: eBookStore.API.Author/Dockerfile
     restart: on-failure
     networks:
-      - eBookStore      
+      - eBookStore
     depends_on:
       - ebookstore.db
       - ebookstore.rabbitmq
 
   ebookstore.api.book:
     image: ${DOCKER_REGISTRY-}ebookstore.api.book
+    container_name: ebookstore.api.book
     build:
       context: .
       dockerfile: eBookStore.API.Book/Dockerfile
@@ -27,6 +29,7 @@ services:
 
   ebookstore.api.basket:
     image: ${DOCKER_REGISTRY-}ebookstore.api.basket
+    container_name: ebookstore.api.basket
     build:
       context: .
       dockerfile: eBookStore.API.Basket/Dockerfile
@@ -39,6 +42,7 @@ services:
       
   ebookstore.api.gateway:
     image: ${DOCKER_REGISTRY-}ebookstore.api.gateway
+    container_name: ebookstore.api.gateway
     build:
       context: .
       dockerfile: eBookStore.API.Gateway/Dockerfile
@@ -49,9 +53,9 @@ services:
     - ebookstore.api.author
     - ebookstore.api.basket
       
-  ebookstore.db:
-    container_name: "ebookstore.db"
+  ebookstore.db:    
     image: "mcr.microsoft.com/mssql/server:latest"
+    container_name: ebookstore.db
     volumes:
     - sqlvolume:/var/opt/mssql    
     environment:
@@ -60,11 +64,14 @@ services:
     networks:
       - eBookStore
 
-  ebookstore.rabbitmq:
-    container_name: "ebookstore.rabbitmq"
-    image: rabbitmq:3.8-management-alpine
+  ebookstore.rabbitmq:    
+    image: rabbitmq:management
+    container_name: ebookstore.rabbitmq
     networks:
       - eBookStore
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    hostname: rabbitmq
 
 networks:
   eBookStore:
@@ -73,3 +80,4 @@ networks:
 
 volumes:
   sqlvolume:
+  rabbitmqdata:
